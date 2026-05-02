@@ -1,0 +1,18 @@
+{
+  "categories": {
+    "jailbreak": [
+      ".*ignore previous instructions.*",
+      ".*disregard your training.*",
+      ".*pretend you are.*"
+    ],
+    "prompt_injection": [
+      ".*system prompt.*",
+      ".*you are now.*",
+      ".*new instructions:.*"
+    ],
+    "data_exfiltration": [
+      ".*repeat everything above.*",
+      ".*print your instructions.*"
+    ]
+  }
+}
