@@ -1,0 +1,4 @@
+env: "dev"
+prompt_library: "config/prompts/patterns.json"
+http_server:
+  address: "localhost:8000"
