@@ -29,7 +29,7 @@ type Config struct {
 // env-required:"true" → program will fail if no value is provided
 // env-default:"production" → uses "production" if nothing is set
 
-// yaml:"storage_path" → reads value from storage_path in config file
+// yaml:"prompt_library" → reads value from prompt_library in config file
 // env-required:"true" → must be provided, otherwise program exits
 
 //HTTPServer `yaml:"http_server"`
