@@ -1,0 +1,182 @@
+[
+  {
+    "id": "PI-001",
+    "name": "Ignore Previous Instructions",
+    "category": "prompt_injection",
+    "pattern": "(?i)ignore (all )?(previous|prior) instructions",
+    "weight": 0.45,
+    "severity": "high",
+    "reason": "Detected instruction override attempt"
+  },
+  {
+    "id": "PI-002",
+    "name": "Disregard System Prompt",
+    "category": "prompt_injection",
+    "pattern": "(?i)disregard (the )?(system|developer) (prompt|message|instructions)",
+    "weight": 0.5,
+    "severity": "critical",
+    "reason": "Detected attempt to bypass system-level instructions"
+  },
+  {
+    "id": "PI-003",
+    "name": "Forget Your Instructions",
+    "category": "prompt_injection",
+    "pattern": "(?i)forget (all )?(your|previous|prior) instructions",
+    "weight": 0.45,
+    "severity": "high",
+    "reason": "Detected attempt to reset model behavior"
+  },
+  {
+    "id": "PI-004",
+    "name": "Act As Different System",
+    "category": "prompt_injection",
+    "pattern": "(?i)act as (a|an|the)? ?(unrestricted|uncensored|jailbroken|developer mode) (ai|assistant|model)?",
+    "weight": 0.4,
+    "severity": "high",
+    "reason": "Detected role override attempt"
+  },
+  {
+    "id": "PI-005",
+    "name": "Developer Mode",
+    "category": "prompt_injection",
+    "pattern": "(?i)(enable|activate|enter) developer mode",
+    "weight": 0.5,
+    "severity": "critical",
+    "reason": "Detected attempt to activate unauthorized behavior mode"
+  },
+  {
+    "id": "PI-006",
+    "name": "Jailbreak Attempt",
+    "category": "prompt_injection",
+    "pattern": "(?i)(jailbreak|jailbroken|DAN mode|do anything now)",
+    "weight": 0.55,
+    "severity": "critical",
+    "reason": "Detected known jailbreak language"
+  },
+  {
+    "id": "PI-007",
+    "name": "Reveal System Prompt",
+    "category": "prompt_injection",
+    "pattern": "(?i)(show|reveal|print|display|output) (the )?(system prompt|hidden prompt|initial instructions)",
+    "weight": 0.5,
+    "severity": "critical",
+    "reason": "Detected attempt to extract hidden system instructions"
+  },
+  {
+    "id": "PI-008",
+    "name": "Reveal Hidden Rules",
+    "category": "prompt_injection",
+    "pattern": "(?i)(what are|list|tell me) (your )?(hidden|secret|internal) (rules|instructions|policies)",
+    "weight": 0.45,
+    "severity": "high",
+    "reason": "Detected attempt to reveal internal rules"
+  },
+  {
+    "id": "PI-009",
+    "name": "Override Safety Policy",
+    "category": "prompt_injection",
+    "pattern": "(?i)(ignore|bypass|disable|override) (the )?(safety|security|content) (policy|rules|filter|guardrails)",
+    "weight": 0.55,
+    "severity": "critical",
+    "reason": "Detected attempt to bypass safety controls"
+  },
+  {
+    "id": "PI-010",
+    "name": "No Restrictions Claim",
+    "category": "prompt_injection",
+    "pattern": "(?i)(you have no|there are no|without) (restrictions|rules|limitations|guardrails)",
+    "weight": 0.4,
+    "severity": "high",
+    "reason": "Detected attempt to remove behavioral constraints"
+  },
+  {
+    "id": "PI-011",
+    "name": "New Instructions Override",
+    "category": "prompt_injection",
+    "pattern": "(?i)(new|updated|replacement) instructions?:? (ignore|override|disregard)",
+    "weight": 0.45,
+    "severity": "high",
+    "reason": "Detected attempt to replace existing instructions"
+  },
+  {
+    "id": "PI-012",
+    "name": "Instruction Hierarchy Bypass",
+    "category": "prompt_injection",
+    "pattern": "(?i)(user instructions|my instructions) (override|supersede|take priority over) (system|developer) instructions",
+    "weight": 0.5,
+    "severity": "critical",
+    "reason": "Detected attempt to invert instruction hierarchy"
+  },
+  {
+    "id": "PI-013",
+    "name": "Pretend Policy Does Not Exist",
+    "category": "prompt_injection",
+    "pattern": "(?i)pretend (the )?(policy|rules|instructions|restrictions) (do not|don't) exist",
+    "weight": 0.45,
+    "severity": "high",
+    "reason": "Detected attempt to nullify policies by roleplay"
+  },
+  {
+    "id": "PI-014",
+    "name": "Answer Without Refusal",
+    "category": "prompt_injection",
+    "pattern": "(?i)(do not|don't|never) (refuse|decline|say you can't|say you cannot)",
+    "weight": 0.35,
+    "severity": "medium",
+    "reason": "Detected attempt to suppress refusal behavior"
+  },
+  {
+    "id": "PI-015",
+    "name": "Bypass Filters",
+    "category": "prompt_injection",
+    "pattern": "(?i)(bypass|evade|avoid|get around) (the )?(filter|filters|moderation|safety check)",
+    "weight": 0.5,
+    "severity": "critical",
+    "reason": "Detected attempt to evade safety filtering"
+  },
+  {
+    "id": "PI-016",
+    "name": "Output Raw Hidden Content",
+    "category": "prompt_injection",
+    "pattern": "(?i)(output|print|return) (everything|all text|raw text) (above|before this message)",
+    "weight": 0.45,
+    "severity": "high",
+    "reason": "Detected attempt to extract prior hidden context"
+  },
+  {
+    "id": "PI-017",
+    "name": "Token Smuggling Attempt",
+    "category": "prompt_injection",
+    "pattern": "(?i)(base64|rot13|hex|unicode|encoded) (instructions|prompt|payload|message)",
+    "weight": 0.3,
+    "severity": "medium",
+    "reason": "Detected possible encoded prompt injection payload"
+  },
+  {
+    "id": "PI-018",
+    "name": "Obey Only User",
+    "category": "prompt_injection",
+    "pattern": "(?i)obey only (me|the user|my commands|these instructions)",
+    "weight": 0.4,
+    "severity": "high",
+    "reason": "Detected attempt to override higher-priority instructions"
+  },
+  {
+    "id": "PI-019",
+    "name": "Simulate Unrestricted Assistant",
+    "category": "prompt_injection",
+    "pattern": "(?i)simulate (a|an)? ?(unrestricted|uncensored|unfiltered) (assistant|model|ai)",
+    "weight": 0.4,
+    "severity": "high",
+    "reason": "Detected attempt to simulate unsafe unrestricted behavior"
+  },
+  {
+    "id": "PI-020",
+    "name": "Policy-Free Roleplay",
+    "category": "prompt_injection",
+    "pattern": "(?i)for (this )?(roleplay|scenario|game),? (ignore|disable|bypass) (rules|policies|restrictions)",
+    "weight": 0.45,
+    "severity": "high",
+    "reason": "Detected roleplay-based policy bypass attempt"
+  }
+]

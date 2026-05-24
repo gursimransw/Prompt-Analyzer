@@ -14,10 +14,11 @@ import (
 	"github.com/gursimransw/prompt-analyzer/internal/utils/response"
 )
 
-//This is our API endpoint function, the http.HandlerFunc basically allow us to expose normla functions
-//As an API endpoint. Here the PromptAnalyzer function will take PatterConfig as an input and analyze the prompt given by the user.
+//This is our API endpoint function, the http.HandlerFunc basically allow us to expose normal functions
+//As an API endpoint. Here the PromptAnalyzer function will take detectionRules  library and policy configuration as an input and analyze the prompt given by the user.
+//And give a verdict
 
-func PromptAnalyzer(config *types.PatternConfig) http.HandlerFunc { //This is the API layer for the function
+func PromptAnalyzer(detectionRules *[]types.DetectionRule, policyConfig *types.PolicyConfig) http.HandlerFunc { //This is the API layer for the function
 
 	//This is where we are handling all the logic, the PromptAnalyzer returns a function , a function that is of type http.HandlerFunc
 	//This is what that function looks like
@@ -52,14 +53,19 @@ func PromptAnalyzer(config *types.PatternConfig) http.HandlerFunc { //This is th
 
 		slog.Info("Analyzing the Prompt", slog.String("prompt", prompt.Prompt))
 
-		matched, category := logic.MatchPromptPattern(config, prompt.Prompt)
+		detectionRuleMatched, matchedRules, matchedRulescategories, matchedRulesReasons, matchedRulesEffectiveWeight, effectiveSeverity, effectiveActions := logic.MatchPromptPattern(detectionRules, policyConfig, prompt.Prompt)
 		//Analyzing the prompt
 
 		//Using WriteJson function to return the following status on success
 		response.WriteJson(w, http.StatusOK, map[string]interface{}{
-			"matched":  matched,
-			"category": category,
-			"input":    prompt.Prompt,
+			"matched":    detectionRuleMatched,
+			"rules":      matchedRules,
+			"input":      prompt.Prompt,
+			"risk_score": matchedRulesEffectiveWeight,
+			"severity":   effectiveSeverity,
+			"verdict":    effectiveActions,
+			"categories": matchedRulescategories,
+			"reasons":    matchedRulesReasons,
 		})
 	}
 }

@@ -1,4 +1,5 @@
 env: "dev"
-prompt_library: "config/prompts/patterns.json"
+detection_rule_library: "config/rules/rules.json"
+policy_config: "config/policy/PolicyConfig.json"
 http_server:
   address: "localhost:8000"

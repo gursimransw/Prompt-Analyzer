@@ -13,9 +13,10 @@ type HTTPServer struct {
 }
 
 type Config struct {
-	Env           string `yaml:"env" env:"ENV" env-required:"true" env-default:"production"`
-	PromptLibrary string `yaml:"prompt_library" prompt_library-required:"true" prompt_library-default:"config/prompts/patterns.json"`
-	HTTPServer    `yaml:"http_server"`
+	Env                  string `yaml:"env" env:"ENV" env-required:"true" env-default:"production"`
+	DetectionRuleLibrary string `yaml:"detection_rule_library" detection_rule_library-required:"true" detection_rule_library-default:"config/rules/rules.json"`
+	PolicyConfig         string `yaml:"policy_config" policy_config-required:"true" policy_config-default:"config/policy/PolicyConfig.json"`
+	HTTPServer           `yaml:"http_server"`
 }
 
 //Here we have created a struct called Config , an instance of this struct will be used to store configurations
@@ -29,7 +30,10 @@ type Config struct {
 // env-required:"true" → program will fail if no value is provided
 // env-default:"production" → uses "production" if nothing is set
 
-// yaml:"prompt_library" → reads value from prompt_library in config file
+// yaml:"detection_rule_library" → reads value from detection_rule_library in config file
+// env-required:"true" → must be provided, otherwise program exits
+
+// yaml:"policy_config" → reads value from policy_config in config file
 // env-required:"true" → must be provided, otherwise program exits
 
 //HTTPServer `yaml:"http_server"`

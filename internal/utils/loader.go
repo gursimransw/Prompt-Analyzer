@@ -9,11 +9,38 @@ import (
 	"github.com/gursimransw/prompt-analyzer/internal/types"
 )
 
-func LoadPatterns(fileName string) (*types.PatternConfig, error) {
+func LoadDetectionRules(fileName string) (*[]types.DetectionRule, error) {
 
-	//This functions simply takes file path as an argument, this is the filepath where the prompt library is saved.
-	//THe function returns the pointer of PatterConfig struct , this struct is like a collection disctionary for all malicious prompt categories and their
-	//respective patterns for detection. (Refer internal/types/types.go for PatternConfig struct)
+	//This functions simply takes file path as an argument, this is the filepath where the detection rule library is saved.
+	//The function returns the pointer of array of DetectionRule struct , this struct is like a structure for a detection rule which contains both detection logic and metadata
+	//(Refer internal/types/types.go for DetectionRule struct)
+
+	data, err := os.ReadFile(fileName)
+	if err != nil {
+		return nil, err
+	}
+
+	//Reading the file for file contents (Detection Rules JSON File in this case)
+
+	var detectionRules []types.DetectionRule
+	//Variable declaration for storing JSON file content
+
+	err = json.Unmarshal(data, &detectionRules)
+	if err != nil {
+		return nil, err
+	}
+	//Here we are loading the contents from the "data", which is a string of bytes and we are storing that data in the address location of
+	//config variable of type (array of DetectionRule) , that we declared above.
+
+	return &detectionRules, nil //We are returning pointer of detectionRule array here
+
+}
+
+func LoadPolicyConfig(fileName string) (*types.PolicyConfig, error) {
+
+	//Just like above, this function loads the Policy Configuration into the program, this policy configuration
+	//consists of both severity configuration and actions configuration. Here we are loading the whole policy into
+	//Variable of type PolicyConfig
 
 	data, err := os.ReadFile(fileName)
 	if err != nil {
@@ -22,16 +49,13 @@ func LoadPatterns(fileName string) (*types.PatternConfig, error) {
 
 	//Reading the file for file contents (Prompt Library JSON File in this case)
 
-	var config types.PatternConfig
+	var policyConfig types.PolicyConfig
 	//Variable declaration for storing JSON file content
 
-	err = json.Unmarshal(data, &config)
+	err = json.Unmarshal(data, &policyConfig)
 	if err != nil {
 		return nil, err
 	}
-	//Here we are loading the contents from the "data", which is a string of bytes and we are storing that data in the address location of
-	//config variable of type PatternConfig , that we declared above.
-
-	return &config, nil //We are returning pointer of config here
+	return &policyConfig, nil //We are returning pointer of policyConfig here
 
 }

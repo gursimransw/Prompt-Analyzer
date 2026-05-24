@@ -28,18 +28,23 @@ func main() {
 
 	slog.Info("Storage Initialized", slog.String("env", cfg.Env), slog.String("version", "1.0.0"))
 
-	PromptLibraryPath := cfg.PromptLibrary
-
-	PatternConfig, err := loader.LoadPatterns(PromptLibraryPath)
+	DetectionRules, err := loader.LoadDetectionRules(cfg.DetectionRuleLibrary)
 	if err != nil {
 		panic(err)
 	}
+	//Loading detection rules library
+
+	PolicyConfig, err := loader.LoadPolicyConfig(cfg.PolicyConfig)
+	if err != nil {
+		panic(err)
+	}
+	//Loading the policy configuration
 
 	//Setup router
 
 	router := http.NewServeMux()
 
-	router.HandleFunc("POST /api/prompt-analyzer/detect", prompts.PromptAnalyzer(PatternConfig).ServeHTTP)
+	router.HandleFunc("POST /api/prompt-analyzer/detect", prompts.PromptAnalyzer(DetectionRules, PolicyConfig).ServeHTTP)
 
 	//Done Channel
 
@@ -58,7 +63,7 @@ func main() {
 
 	go func() {
 
-		fmt.Printf("Students API Server Started %s", cfg.HTTPServer.Addr)
+		fmt.Printf("Prompt Analyzer Server %s", cfg.HTTPServer.Addr)
 		err := server.ListenAndServe()
 		if err != nil {
 			log.Fatal("Failed to start server")
