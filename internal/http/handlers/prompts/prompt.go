@@ -11,7 +11,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/gursimransw/prompt-analyzer/internal/logic"
 	"github.com/gursimransw/prompt-analyzer/internal/types"
-	"github.com/gursimransw/prompt-analyzer/internal/utils/response"
+	"github.com/gursimransw/prompt-analyzer/utils/response"
 )
 
 //This is our API endpoint function, the http.HandlerFunc basically allow us to expose normal functions

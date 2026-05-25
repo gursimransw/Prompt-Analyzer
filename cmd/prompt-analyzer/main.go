@@ -11,9 +11,9 @@ import (
 	"syscall"
 	"time"
 
-	config "github.com/gursimransw/prompt-analyzer/internal"
+	"github.com/gursimransw/prompt-analyzer/internal/config"
 	"github.com/gursimransw/prompt-analyzer/internal/http/handlers/prompts"
-	loader "github.com/gursimransw/prompt-analyzer/internal/utils"
+	"github.com/gursimransw/prompt-analyzer/internal/loader"
 )
 
 func main() {

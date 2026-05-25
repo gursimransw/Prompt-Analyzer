@@ -15,7 +15,7 @@ type HTTPServer struct {
 type Config struct {
 	Env                  string `yaml:"env" env:"ENV" env-required:"true" env-default:"production"`
 	DetectionRuleLibrary string `yaml:"detection_rule_library" detection_rule_library-required:"true" detection_rule_library-default:"config/rules/rules.json"`
-	PolicyConfig         string `yaml:"policy_config" policy_config-required:"true" policy_config-default:"config/policy/PolicyConfig.json"`
+	PolicyConfig         string `yaml:"policy_config" policy_config-required:"true" policy_config-default:"config/policy/config.json"`
 	HTTPServer           `yaml:"http_server"`
 }
 
