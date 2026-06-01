@@ -2,8 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
-	"log"
 	"log/slog"
 	"net/http"
 	"os"
@@ -26,17 +24,23 @@ func main() {
 	// 	log.Fatal(err)
 	// }
 
-	slog.Info("Storage Initialized", slog.String("env", cfg.Env), slog.String("version", "1.0.0"))
-
 	DetectionRules, err := loader.LoadDetectionRules(cfg.DetectionRuleLibrary)
 	if err != nil {
-		panic(err)
+		slog.Error("Failed to load Detection Rules from ", slog.String("path", cfg.DetectionRuleLibrary), slog.String("error", err.Error()))
+		os.Exit(1)
+	} else {
+		slog.Info("Loaded detection rule library from ", slog.String("path", cfg.DetectionRuleLibrary))
+
 	}
 	//Loading detection rules library
 
 	PolicyConfig, err := loader.LoadPolicyConfig(cfg.PolicyConfig)
 	if err != nil {
-		panic(err)
+		slog.Error("Failed to load policy configuration from ", slog.String("path", cfg.PolicyConfig), slog.String("error", err.Error()))
+		os.Exit(1)
+
+	} else {
+		slog.Info("Loaded policy configuration from ", slog.String("path", cfg.PolicyConfig))
 	}
 	//Loading the policy configuration
 
@@ -55,18 +59,20 @@ func main() {
 	//Setup Server
 
 	server := http.Server{
-		Addr:    cfg.Addr,
+		Addr:    cfg.HTTPServer.Addr,
 		Handler: router,
 	}
 
-	slog.Info("Server Started", slog.String("address", cfg.Addr))
+	slog.Info("Server Started", slog.String("address", cfg.HTTPServer.Addr), slog.String("environment", cfg.Env))
 
 	go func() {
 
-		fmt.Printf("Prompt Analyzer Server %s", cfg.HTTPServer.Addr)
 		err := server.ListenAndServe()
-		if err != nil {
-			log.Fatal("Failed to start server")
+		if err == http.ErrServerClosed {
+			slog.Info("Server stopped", slog.String("error", err.Error()))
+		} else if err != nil {
+			slog.Error("Failed to start the server", slog.String("error", err.Error()))
+			os.Exit(1)
 		}
 
 	}()

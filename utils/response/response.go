@@ -10,8 +10,9 @@ import (
 )
 
 type Response struct {
-	Status string `json:"status"`
-	Error  string `json:"error"`
+	Status    string `json:"status"`
+	Error     string `json:"error"`
+	RequestId string `json:"requestId"`
 } //This is  a struct that we have created for client side, the tags specify how they will be displayed to the end client
 
 const (
@@ -38,17 +39,18 @@ func WriteJson(w http.ResponseWriter, status int, data interface{}) error {
 
 // This is a General Error function that will be used to cover a broader class of errors during runtime.
 // This will be the reponse body that will be given to client for all errors exceptn validation errors
-func GeneralError(err error) Response {
+func GeneralError(err error, requestId string) Response {
 	return Response{
-		Status: StatusError,
-		Error:  err.Error(),
+		RequestId: requestId,
+		Status:    StatusError,
+		Error:     err.Error(),
 	}
 
 }
 
 // This function is specifically meant to for any validation errors like - Missing / Malformed fields
 // If there's a validation error due to malformed / missing fields, this response body will be returned to the client
-func ValidationError(errs validator.ValidationErrors) Response {
+func ValidationError(errs validator.ValidationErrors, requestId string) Response {
 	var errMsgs []string
 	//Initialize an empty slice for all error messages in errs
 
@@ -68,8 +70,9 @@ func ValidationError(errs validator.ValidationErrors) Response {
 	}
 
 	return Response{
-		Status: StatusError,
-		Error:  strings.Join(errMsgs, ","),
+		RequestId: requestId,
+		Status:    StatusError,
+		Error:     strings.Join(errMsgs, ","),
 	} //Returning response with the exact error
 
 }
