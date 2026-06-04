@@ -61,7 +61,7 @@ type promptAnalyzerResponse struct {
 	Matched    bool     `json:"matched"`
 	Rules      []string `json:"rules"`
 	Input      string   `json:"input"`
-	RiskScore  float64  `json:"risk_score"`
+	RiskScore  float64  `json:"riskScore"`
 	Severity   string   `json:"severity"`
 	Verdict    string   `json:"verdict"`
 	Categories []string `json:"categories"`
