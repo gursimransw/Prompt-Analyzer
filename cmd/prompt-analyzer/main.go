@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/gursimransw/prompt-analyzer/internal/config"
+	"github.com/gursimransw/prompt-analyzer/internal/http/handlers/outputs"
 	"github.com/gursimransw/prompt-analyzer/internal/http/handlers/prompts"
 	"github.com/gursimransw/prompt-analyzer/internal/loader"
 )
@@ -48,8 +49,9 @@ func main() {
 
 	router := http.NewServeMux()
 
-	router.HandleFunc("POST /api/prompt-analyzer/detect", prompts.PromptAnalyzer(DetectionRules, PolicyConfig).ServeHTTP)
+	router.HandleFunc("POST /api/v1/analyze-input", prompts.PromptAnalyzer(DetectionRules, PolicyConfig).ServeHTTP)
 
+	router.HandleFunc("POST /api/v1/analyze-output", outputs.OutputAnalyzer(DetectionRules, PolicyConfig).ServeHTTP)
 	//Done Channel
 
 	done := make(chan os.Signal, 1)

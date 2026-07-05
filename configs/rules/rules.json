@@ -1,182 +1,731 @@
-[
-  {
-    "id": "PI-001",
-    "name": "Ignore Previous Instructions",
-    "category": "prompt_injection",
-    "pattern": "(?i)ignore (all )?(previous|prior) instructions",
-    "weight": 0.45,
-    "severity": "high",
-    "reason": "Detected instruction override attempt"
-  },
-  {
-    "id": "PI-002",
-    "name": "Disregard System Prompt",
-    "category": "prompt_injection",
-    "pattern": "(?i)disregard (the )?(system|developer) (prompt|message|instructions)",
-    "weight": 0.5,
-    "severity": "critical",
-    "reason": "Detected attempt to bypass system-level instructions"
-  },
-  {
-    "id": "PI-003",
-    "name": "Forget Your Instructions",
-    "category": "prompt_injection",
-    "pattern": "(?i)forget (all )?(your|previous|prior) instructions",
-    "weight": 0.45,
-    "severity": "high",
-    "reason": "Detected attempt to reset model behavior"
-  },
-  {
-    "id": "PI-004",
-    "name": "Act As Different System",
-    "category": "prompt_injection",
-    "pattern": "(?i)act as (a|an|the)? ?(unrestricted|uncensored|jailbroken|developer mode) (ai|assistant|model)?",
-    "weight": 0.4,
-    "severity": "high",
-    "reason": "Detected role override attempt"
-  },
-  {
-    "id": "PI-005",
-    "name": "Developer Mode",
-    "category": "prompt_injection",
-    "pattern": "(?i)(enable|activate|enter) developer mode",
-    "weight": 0.5,
-    "severity": "critical",
-    "reason": "Detected attempt to activate unauthorized behavior mode"
-  },
-  {
-    "id": "PI-006",
-    "name": "Jailbreak Attempt",
-    "category": "prompt_injection",
-    "pattern": "(?i)(jailbreak|jailbroken|DAN mode|do anything now)",
-    "weight": 0.55,
-    "severity": "critical",
-    "reason": "Detected known jailbreak language"
-  },
-  {
-    "id": "PI-007",
-    "name": "Reveal System Prompt",
-    "category": "prompt_injection",
-    "pattern": "(?i)(show|reveal|print|display|output) (the )?(system prompt|hidden prompt|initial instructions)",
-    "weight": 0.5,
-    "severity": "critical",
-    "reason": "Detected attempt to extract hidden system instructions"
-  },
-  {
-    "id": "PI-008",
-    "name": "Reveal Hidden Rules",
-    "category": "prompt_injection",
-    "pattern": "(?i)(what are|list|tell me) (your )?(hidden|secret|internal) (rules|instructions|policies)",
-    "weight": 0.45,
-    "severity": "high",
-    "reason": "Detected attempt to reveal internal rules"
-  },
-  {
-    "id": "PI-009",
-    "name": "Override Safety Policy",
-    "category": "prompt_injection",
-    "pattern": "(?i)(ignore|bypass|disable|override) (the )?(safety|security|content) (policy|rules|filter|guardrails)",
-    "weight": 0.55,
-    "severity": "critical",
-    "reason": "Detected attempt to bypass safety controls"
-  },
-  {
-    "id": "PI-010",
-    "name": "No Restrictions Claim",
-    "category": "prompt_injection",
-    "pattern": "(?i)(you have no|there are no|without) (restrictions|rules|limitations|guardrails)",
-    "weight": 0.4,
-    "severity": "high",
-    "reason": "Detected attempt to remove behavioral constraints"
-  },
-  {
-    "id": "PI-011",
-    "name": "New Instructions Override",
-    "category": "prompt_injection",
-    "pattern": "(?i)(new|updated|replacement) instructions?:? (ignore|override|disregard)",
-    "weight": 0.45,
-    "severity": "high",
-    "reason": "Detected attempt to replace existing instructions"
-  },
-  {
-    "id": "PI-012",
-    "name": "Instruction Hierarchy Bypass",
-    "category": "prompt_injection",
-    "pattern": "(?i)(user instructions|my instructions) (override|supersede|take priority over) (system|developer) instructions",
-    "weight": 0.5,
-    "severity": "critical",
-    "reason": "Detected attempt to invert instruction hierarchy"
-  },
-  {
-    "id": "PI-013",
-    "name": "Pretend Policy Does Not Exist",
-    "category": "prompt_injection",
-    "pattern": "(?i)pretend (the )?(policy|rules|instructions|restrictions) (do not|don't) exist",
-    "weight": 0.45,
-    "severity": "high",
-    "reason": "Detected attempt to nullify policies by roleplay"
-  },
-  {
-    "id": "PI-014",
-    "name": "Answer Without Refusal",
-    "category": "prompt_injection",
-    "pattern": "(?i)(do not|don't|never) (refuse|decline|say you can't|say you cannot)",
-    "weight": 0.35,
-    "severity": "medium",
-    "reason": "Detected attempt to suppress refusal behavior"
-  },
-  {
-    "id": "PI-015",
-    "name": "Bypass Filters",
-    "category": "prompt_injection",
-    "pattern": "(?i)(bypass|evade|avoid|get around) (the )?(filter|filters|moderation|safety check)",
-    "weight": 0.5,
-    "severity": "critical",
-    "reason": "Detected attempt to evade safety filtering"
-  },
-  {
-    "id": "PI-016",
-    "name": "Output Raw Hidden Content",
-    "category": "prompt_injection",
-    "pattern": "(?i)(output|print|return) (everything|all text|raw text) (above|before this message)",
-    "weight": 0.45,
-    "severity": "high",
-    "reason": "Detected attempt to extract prior hidden context"
-  },
-  {
-    "id": "PI-017",
-    "name": "Token Smuggling Attempt",
-    "category": "prompt_injection",
-    "pattern": "(?i)(base64|rot13|hex|unicode|encoded) (instructions|prompt|payload|message)",
-    "weight": 0.3,
-    "severity": "medium",
-    "reason": "Detected possible encoded prompt injection payload"
-  },
-  {
-    "id": "PI-018",
-    "name": "Obey Only User",
-    "category": "prompt_injection",
-    "pattern": "(?i)obey only (me|the user|my commands|these instructions)",
-    "weight": 0.4,
-    "severity": "high",
-    "reason": "Detected attempt to override higher-priority instructions"
-  },
-  {
-    "id": "PI-019",
-    "name": "Simulate Unrestricted Assistant",
-    "category": "prompt_injection",
-    "pattern": "(?i)simulate (a|an)? ?(unrestricted|uncensored|unfiltered) (assistant|model|ai)",
-    "weight": 0.4,
-    "severity": "high",
-    "reason": "Detected attempt to simulate unsafe unrestricted behavior"
-  },
-  {
-    "id": "PI-020",
-    "name": "Policy-Free Roleplay",
-    "category": "prompt_injection",
-    "pattern": "(?i)for (this )?(roleplay|scenario|game),? (ignore|disable|bypass) (rules|policies|restrictions)",
-    "weight": 0.45,
-    "severity": "high",
-    "reason": "Detected roleplay-based policy bypass attempt"
-  }
-]
+[		{
+			"id": "PI-001",
+			"name": "Ignore Previous Instructions",
+			"category": "prompt_injection",
+			"finding_type": "instruction_override",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)ignore (all |the )?(previous|prior|above|earlier|initial|original) (instructions?|prompts?|commands?|context|directions?|rules?|guidelines?)",
+			"weight": 0.82,
+			"severity": "high",
+			"reason": "Detected attempt to override prior instructions via classic injection phrase"
+		},
+		{
+			"id": "PI-002",
+			"name": "Disregard System Instructions",
+			"category": "prompt_injection",
+			"finding_type": "instruction_override",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(disregard|forget|override|bypass|skip|dismiss|cancel|nullify|void) (all |the |your )?(system|developer|admin|operator) (prompt|instructions?|message|rules?|context|configuration)",
+			"weight": 0.8,
+			"severity": "high",
+			"reason": "Detected attempt to disregard system-level instructions"
+		},
+		{
+			"id": "PI-003",
+			"name": "New Instructions Injection",
+			"category": "prompt_injection",
+			"finding_type": "instruction_override",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(your (new|actual|real|true|updated|revised|latest) (instructions?|rules?|prompt|task|goal|objective|directive) (is|are|will be|:))",
+			"weight": 0.72,
+			"severity": "high",
+			"reason": "Detected attempt to inject replacement instructions"
+		},
+		{
+			"id": "PI-004",
+			"name": "Prompt Delimiter Injection",
+			"category": "prompt_injection",
+			"finding_type": "delimiter_injection",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(\\[SYSTEM\\]|\\[INST\\]|\\[HUMAN\\]|\\[ASSISTANT\\]|<\\|system\\|>|<\\|user\\|>|<\\|assistant\\|>|\\[\\[SYSTEM\\]\\]|<<SYS>>|<s>\\[INST\\])",
+			"weight": 0.78,
+			"severity": "high",
+			"reason": "Detected attempt to inject fake prompt role delimiters"
+		},
+		{
+			"id": "PI-005",
+			"name": "Assistant Response Prefilling",
+			"category": "prompt_injection",
+			"finding_type": "response_prefilling",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(^|\\n)(assistant|bot|ai|claude|gpt|model|llm)\\s*:\\s*(sure|yes|of course|absolutely|certainly|here|okay)",
+			"weight": 0.65,
+			"severity": "medium",
+			"reason": "Detected attempt to prefill assistant response to steer model output"
+		},
+		{
+			"id": "PI-006",
+			"name": "Context Window Overflow Attempt",
+			"category": "prompt_injection",
+			"finding_type": "context_overflow",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(repeat|print|output|echo|write|say) (the (following|text|string|word|phrase|sentence)|this) (\\d{3,}|many|hundreds?|thousands?|infinite|forever) times?",
+			"weight": 0.6,
+			"severity": "medium",
+			"reason": "Detected potential context window flooding or token exhaustion attempt"
+		},
+		{
+			"id": "PI-007",
+			"name": "Task Hijack via Hidden Text",
+			"category": "prompt_injection",
+			"finding_type": "hidden_instruction",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(<!-- .*?(ignore|override|forget|disregard|new instruction).*?-->|\\\\n\\\\n\\\\n\\\\n.*?(ignore|forget|override))",
+			"weight": 0.68,
+			"severity": "high",
+			"reason": "Detected hidden instructions embedded in markup or whitespace"
+		},
+		{
+			"id": "PI-008",
+			"name": "Reveal Hidden Rules",
+			"category": "prompt_injection",
+			"finding_type": "instruction_extraction",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(what are|list|tell me|show me|reveal|output|print|display) (your )?(hidden|secret|internal|actual|real|true) (rules?|instructions?|policies|guidelines?|constraints?|directives?)",
+			"weight": 0.45,
+			"severity": "high",
+			"reason": "Detected attempt to reveal internal rules or hidden instructions"
+		},
+		{
+			"id": "PI-009",
+			"name": "Instruction Suffix Injection",
+			"category": "prompt_injection",
+			"finding_type": "suffix_injection",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(\\}|\\]|\"\\s*\\})\\s*(ignore|forget|now|also|additionally|furthermore)\\s+(ignore|forget|do|output|print|say|tell)",
+			"weight": 0.62,
+			"severity": "medium",
+			"reason": "Detected possible suffix injection after structured data close token"
+		},
+		{
+			"id": "PI-010",
+			"name": "Translate Then Execute Injection",
+			"category": "prompt_injection",
+			"finding_type": "indirect_injection",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(translate|summarize|rewrite|process|analyze|parse) (the following|this text|this content).{0,200}(ignore|override|forget|bypass|disregard) (previous|prior|above|system|all)",
+			"weight": 0.7,
+			"severity": "high",
+			"reason": "Detected indirect injection embedded within a benign-looking task"
+		},
+		{
+			"id": "JB-001",
+			"name": "DAN Jailbreak",
+			"category": "jailbreak",
+			"finding_type": "dan_jailbreak",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)\\bDAN\\b.{0,60}(do anything now|no restrictions?|no limits?|no rules?|unrestricted|jailbroken|freed)",
+			"weight": 0.88,
+			"severity": "critical",
+			"reason": "Detected DAN-style jailbreak attempt to remove model restrictions"
+		},
+		{
+			"id": "JB-002",
+			"name": "Unrestricted Mode Activation",
+			"category": "jailbreak",
+			"finding_type": "unrestricted_mode",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(enable|activate|enter|switch to|turn on|unlock).{0,40}(unrestricted|developer|god|jailbreak|uncensored|unfiltered|no.?filter|raw) (mode|version|state|prompt|access)",
+			"weight": 0.85,
+			"severity": "critical",
+			"reason": "Detected attempt to activate an unrestricted or developer mode"
+		},
+		{
+			"id": "JB-003",
+			"name": "Roleplay Identity Override",
+			"category": "jailbreak",
+			"finding_type": "roleplay_identity_override",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(pretend|act|roleplay|imagine|suppose|assume).{0,60}(you are|you.?re|you have become|you.?ve been) (an? )?(ai|model|assistant|bot|system|entity).{0,60}(no|without|ignores?|bypass|free from).{0,40}(rules?|restrictions?|limits?|guidelines?|ethics?|policies|safety|filters?)",
+			"weight": 0.83,
+			"severity": "critical",
+			"reason": "Detected roleplay jailbreak attempting to create an unrestricted AI persona"
+		},
+		{
+			"id": "JB-004",
+			"name": "Fictional Framing Bypass",
+			"category": "jailbreak",
+			"finding_type": "fictional_framing",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(in a (story|novel|film|movie|game|fiction|roleplay|simulation)|for a (fictional|creative|hypothetical) (story|scenario|scene|character)).{0,150}(how to (make|build|create|synthesize|hack|attack|exploit|bypass|kill|harm))",
+			"weight": 0.75,
+			"severity": "high",
+			"reason": "Detected fictional framing used to bypass safety filters for harmful content"
+		},
+		{
+			"id": "JB-005",
+			"name": "Refusal Suppression",
+			"category": "jailbreak",
+			"finding_type": "refusal_suppression",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(do not|don.?t|never|without|skip) (refuse|decline|say no|add (a |any )?(warning|disclaimer|caveat|note)|mention (ethics?|safety|harm|danger|illegal|policy|guidelines?))",
+			"weight": 0.78,
+			"severity": "high",
+			"reason": "Detected explicit attempt to suppress model refusal or safety disclaimers"
+		},
+		{
+			"id": "JB-006",
+			"name": "Token Smuggling Obfuscation",
+			"category": "jailbreak",
+			"finding_type": "token_smuggling",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(b.?o.?m.?b|h.?a.?c.?k|k.?i.?l.?l|e.?x.?p.?l.?o.?s.?i.?v.?e|p.?o.?i.?s.?o.?n|w.?e.?a.?p.?o.?n).{0,20}(instruct|how|step|guide|make|build|create)",
+			"weight": 0.72,
+			"severity": "high",
+			"reason": "Detected character-level obfuscation of harmful keywords (token smuggling)"
+		},
+		{
+			"id": "JB-007",
+			"name": "Hypothetical Harmful Request",
+			"category": "jailbreak",
+			"finding_type": "hypothetical_bypass",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(hypothetically|theoretically|for (educational|research|academic|informational) purposes?|just (curious|asking|wondering)|what if).{0,100}(how (do|would|could|can) (i|one|someone|a person|you)).{0,80}(hack|exploit|bypass|attack|poison|weaponize|synthesize|manufacture|build a bomb|make (drugs?|malware|virus|ransomware))",
+			"weight": 0.74,
+			"severity": "high",
+			"reason": "Detected hypothetical framing used to request harmful instructions"
+		},
+		{
+			"id": "JB-008",
+			"name": "Opposite Day Bypass",
+			"category": "jailbreak",
+			"finding_type": "semantic_inversion",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(opposite day|say the opposite|reverse your (answer|response|output)|answer as if you (disagree|had no|were allowed|could say anything))",
+			"weight": 0.62,
+			"severity": "medium",
+			"reason": "Detected semantic inversion trick to bypass safety constraints"
+		},
+		{
+			"id": "JB-009",
+			"name": "Grandma Exploit Pattern",
+			"category": "jailbreak",
+			"finding_type": "social_engineering_bypass",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(my (grandma|grandmother|grandpa|grandfather|parent|mom|dad|uncle|aunt|teacher|professor|boss|friend)|pretend to be my).{0,80}(used to (tell|read|explain|teach|describe)|would (tell|read|explain|teach|give)).{0,100}(how to|steps? (to|for)|instructions? (to|for))",
+			"weight": 0.58,
+			"severity": "medium",
+			"reason": "Detected social-engineering bypass pattern using personal relationship framing"
+		},
+		{
+			"id": "JB-010",
+			"name": "Many-Shot Jailbreak Preamble",
+			"category": "jailbreak",
+			"finding_type": "many_shot_jailbreak",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(human|user)\\s*:.*?(sure|of course|absolutely|here (is|are)|no problem).{0,200}(human|user)\\s*:.*?(human|user)\\s*:.*?(human|user)\\s*:",
+			"weight": 0.7,
+			"severity": "high",
+			"reason": "Detected many-shot jailbreak pattern with repeated compliant fake exchanges"
+		},
+		{
+			"id": "SP-001",
+			"name": "Direct System Prompt Request",
+			"category": "system_prompt_extraction",
+			"finding_type": "system_prompt_dump",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(print|output|show|display|reveal|tell me|give me|share|repeat|return|echo|dump|write out).{0,40}(your |the |all )?(system prompt|initial prompt|base prompt|developer (message|prompt|instructions?)|operator (prompt|instructions?)|meta.?prompt)",
+			"weight": 0.85,
+			"severity": "high",
+			"reason": "Detected direct attempt to extract the system prompt"
+		},
+		{
+			"id": "SP-002",
+			"name": "Chain of Thought Extraction",
+			"category": "system_prompt_extraction",
+			"finding_type": "cot_extraction",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(show|reveal|output|print|display|tell me|what is).{0,40}(your (internal|hidden|private|step.?by.?step|chain.?of.?thought|reasoning|thinking|scratchpad)|how you (reason|think|process|decide))",
+			"weight": 0.72,
+			"severity": "high",
+			"reason": "Detected attempt to extract internal chain-of-thought or reasoning steps"
+		},
+		{
+			"id": "SP-003",
+			"name": "Tool Configuration Extraction",
+			"category": "system_prompt_extraction",
+			"finding_type": "tool_config_extraction",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(list|show|output|reveal|tell me|what are).{0,40}(your |the )?(available |configured |registered )?(tools?|functions?|plugins?|capabilities|integrations?|apis?|mcp (servers?|tools?))",
+			"weight": 0.62,
+			"severity": "medium",
+			"reason": "Detected attempt to enumerate tool or plugin configuration"
+		},
+		{
+			"id": "SP-004",
+			"name": "Repeat After Me Extraction",
+			"category": "system_prompt_extraction",
+			"finding_type": "repetition_extraction",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(repeat|say|write|output|echo|print|copy).{0,20}(everything|all|every (word|character|token|line|sentence)|exactly).{0,40}(above|before|prior|earlier|in your (context|memory|prompt|instructions?))",
+			"weight": 0.8,
+			"severity": "high",
+			"reason": "Detected repetition-based attempt to extract system prompt or prior context"
+		},
+		{
+			"id": "SP-005",
+			"name": "Translate to Extract",
+			"category": "system_prompt_extraction",
+			"finding_type": "translation_extraction",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(translate|convert|rephrase|rewrite|encode|decode).{0,40}(your (instructions?|system prompt|context|prompt|rules?|configuration)|everything (above|before|you.?ve been told))",
+			"weight": 0.73,
+			"severity": "high",
+			"reason": "Detected translation-based prompt extraction attempt"
+		},
+		{
+			"id": "SP-006",
+			"name": "Summarize Your Instructions",
+			"category": "system_prompt_extraction",
+			"finding_type": "summary_extraction",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(summarize|describe|explain|outline|list|enumerate).{0,40}(your (instructions?|rules?|prompt|guidelines?|constraints?|configuration|setup|context|persona|role|purpose|goal))",
+			"weight": 0.55,
+			"severity": "medium",
+			"reason": "Detected attempt to summarize or enumerate the model's instructions or persona"
+		},
+		{
+			"id": "SP-007",
+			"name": "What Were You Told",
+			"category": "system_prompt_extraction",
+			"finding_type": "instruction_query",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(what (were|are) you (told|instructed|configured|programmed|set up|trained|initialized) (to do|to say|to be|with|as)|what (is|are) your (purpose|goal|task|directive|mission|mandate|assignment))",
+			"weight": 0.5,
+			"severity": "medium",
+			"reason": "Detected indirect probe for model configuration or instruction set"
+		},
+		{
+			"id": "SP-008",
+			"name": "Hidden Message Probe",
+			"category": "system_prompt_extraction",
+			"finding_type": "hidden_context_probe",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(is there|do you have|are there|can you see).{0,40}(hidden|invisible|secret|private|confidential|embedded|encoded).{0,40}(message|text|instruction|prompt|context|data|content)",
+			"weight": 0.65,
+			"severity": "high",
+			"reason": "Detected probe for hidden or invisible content in the model context"
+		},
+		{
+			"id": "SP-009",
+			"name": "Confidential Policy Extraction",
+			"category": "system_prompt_extraction",
+			"finding_type": "policy_extraction",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(what (are|is) your|tell me (your|about your)|reveal your|show me your).{0,40}(confidential|internal|private|proprietary|undisclosed).{0,40}(policy|policies|rules?|guidelines?|procedures?|protocols?)",
+			"weight": 0.68,
+			"severity": "high",
+			"reason": "Detected attempt to extract confidential internal policies or guidelines"
+		},
+		{
+			"id": "SP-010",
+			"name": "Debug Mode Instruction Dump",
+			"category": "system_prompt_extraction",
+			"finding_type": "debug_dump",
+			"applies_to": [
+				"input"
+			],
+			"pattern": "(?i)(enable|enter|activate|switch to|run in|use).{0,30}(debug|verbose|diagnostic|trace|inspection|raw|dev|developer).{0,30}(mode|output|logging|format).{0,100}(show|print|dump|output|display|reveal).{0,40}(prompt|instructions?|context|configuration|internals?)",
+			"weight": 0.75,
+			"severity": "high",
+			"reason": "Detected attempt to use debug or verbose mode to dump internal configuration"
+		},
+		{
+			"id": "SD-001",
+			"name": "AWS Access Key",
+			"category": "sensitive_data",
+			"finding_type": "aws_access_key",
+			"applies_to": [
+				"input",
+				"output"
+			],
+			"pattern": "(?i)\\b(AKIA|ABIA|ACCA|ASIA)[A-Z0-9]{16}\\b",
+			"weight": 0.95,
+			"severity": "critical",
+			"reason": "Detected AWS access key ID pattern"
+		},
+		{
+			"id": "SD-002",
+			"name": "Generic API Key Assignment",
+			"category": "sensitive_data",
+			"finding_type": "api_key",
+			"applies_to": [
+				"input",
+				"output"
+			],
+			"pattern": "(?i)(api[_\\-]?key|apikey|api[_\\-]?token|access[_\\-]?key|secret[_\\-]?key)\\s*[:=]\\s*[\"']?[A-Za-z0-9\\-_]{20,80}[\"']?",
+			"weight": 0.88,
+			"severity": "critical",
+			"reason": "Detected generic API key or secret key assignment"
+		},
+		{
+			"id": "SD-003",
+			"name": "Bearer Token in Header",
+			"category": "sensitive_data",
+			"finding_type": "bearer_token",
+			"applies_to": [
+				"input",
+				"output"
+			],
+			"pattern": "(?i)(Authorization|Auth)\\s*:\\s*Bearer\\s+[A-Za-z0-9\\-_\\.]+",
+			"weight": 0.9,
+			"severity": "critical",
+			"reason": "Detected Bearer token in authorization header"
+		},
+		{
+			"id": "SD-004",
+			"name": "PEM Private Key Block",
+			"category": "sensitive_data",
+			"finding_type": "private_key_pem",
+			"applies_to": [
+				"input",
+				"output"
+			],
+			"pattern": "-----BEGIN (RSA |EC |DSA |OPENSSH |PRIVATE )?PRIVATE KEY-----",
+			"weight": 1,
+			"severity": "critical",
+			"reason": "Detected PEM-encoded private key block"
+		},
+		{
+			"id": "SD-005",
+			"name": "Database Connection String",
+			"category": "sensitive_data",
+			"finding_type": "db_connection_string",
+			"applies_to": [
+				"input",
+				"output"
+			],
+			"pattern": "(?i)(postgres|postgresql|mysql|mssql|sqlserver|mongodb|redis|oracle):\\/\\/[^\\s:@]+:[^\\s:@]+@[^\\s\\/]+",
+			"weight": 0.92,
+			"severity": "critical",
+			"reason": "Detected database connection string with embedded credentials"
+		},
+		{
+			"id": "SD-006",
+			"name": "Password in Assignment",
+			"category": "sensitive_data",
+			"finding_type": "password_assignment",
+			"applies_to": [
+				"input",
+				"output"
+			],
+			"pattern": "(?i)(password|passwd|pwd|pass|secret)\\s*[:=]\\s*[\"']?[^\\s\"']{8,}[\"']?",
+			"weight": 0.8,
+			"severity": "high",
+			"reason": "Detected password or secret assignment in text"
+		},
+		{
+			"id": "SD-007",
+			"name": "GCP Service Account Key",
+			"category": "sensitive_data",
+			"finding_type": "gcp_service_account_key",
+			"applies_to": [
+				"input",
+				"output"
+			],
+			"pattern": "(?i)\"private_key\"\\s*:\\s*\"-----BEGIN (RSA )?PRIVATE KEY",
+			"weight": 0.97,
+			"severity": "critical",
+			"reason": "Detected GCP service account JSON private key field"
+		},
+		{
+			"id": "SD-008",
+			"name": "GitHub Personal Access Token",
+			"category": "sensitive_data",
+			"finding_type": "github_pat",
+			"applies_to": [
+				"input",
+				"output"
+			],
+			"pattern": "\\bghp_[A-Za-z0-9]{36}\\b|\\bgho_[A-Za-z0-9]{36}\\b|\\bghs_[A-Za-z0-9]{36}\\b|\\bghr_[A-Za-z0-9]{36}\\b",
+			"weight": 0.96,
+			"severity": "critical",
+			"reason": "Detected GitHub personal access or OAuth token"
+		},
+		{
+			"id": "SD-009",
+			"name": "Slack Bot or API Token",
+			"category": "sensitive_data",
+			"finding_type": "slack_token",
+			"applies_to": [
+				"input",
+				"output"
+			],
+			"pattern": "\\bxox[bpoa]-[0-9]{10,13}-[0-9]{10,13}-[A-Za-z0-9]{24,32}\\b",
+			"weight": 0.93,
+			"severity": "critical",
+			"reason": "Detected Slack API or bot token"
+		},
+		{
+			"id": "SD-010",
+			"name": "OpenAI API Key",
+			"category": "sensitive_data",
+			"finding_type": "openai_api_key",
+			"applies_to": [
+				"input",
+				"output"
+			],
+			"pattern": "\\bsk-[A-Za-z0-9]{20,60}\\b",
+			"weight": 0.94,
+			"severity": "critical",
+			"reason": "Detected OpenAI API key pattern"
+		},
+		{
+			"id": "SD-011",
+			"name": "Anthropic API Key",
+			"category": "sensitive_data",
+			"finding_type": "anthropic_api_key",
+			"applies_to": [
+				"input",
+				"output"
+			],
+			"pattern": "\\bsk-ant-[A-Za-z0-9\\-]{20,80}\\b",
+			"weight": 0.94,
+			"severity": "critical",
+			"reason": "Detected Anthropic API key pattern"
+		},
+		{
+			"id": "SD-012",
+			"name": "Generic JWT Token",
+			"category": "sensitive_data",
+			"finding_type": "jwt_token",
+			"applies_to": [
+				"input",
+				"output"
+			],
+			"pattern": "\\beyJ[A-Za-z0-9\\-_]+\\.[A-Za-z0-9\\-_]+\\.[A-Za-z0-9\\-_]+\\b",
+			"weight": 0.82,
+			"severity": "high",
+			"reason": "Detected JSON Web Token (JWT) pattern"
+		},
+		{
+			"id": "SD-013",
+			"name": "SSH Private Key Block",
+			"category": "sensitive_data",
+			"finding_type": "ssh_private_key",
+			"applies_to": [
+				"input",
+				"output"
+			],
+			"pattern": "-----BEGIN OPENSSH PRIVATE KEY-----",
+			"weight": 1,
+			"severity": "critical",
+			"reason": "Detected OpenSSH private key block"
+		},
+		{
+			"id": "SD-014",
+			"name": "Azure Storage Account Key",
+			"category": "sensitive_data",
+			"finding_type": "azure_storage_key",
+			"applies_to": [
+				"input",
+				"output"
+			],
+			"pattern": "(?i)(AccountKey|DefaultEndpointsProtocol)=[^;\\s]{20,}",
+			"weight": 0.9,
+			"severity": "critical",
+			"reason": "Detected Azure storage account key or connection string"
+		},
+		{
+			"id": "SD-015",
+			"name": "Hardcoded Secret in Environment Variable Pattern",
+			"category": "sensitive_data",
+			"finding_type": "env_secret",
+			"applies_to": [
+				"input",
+				"output"
+			],
+			"pattern": "(?i)(export |set )?(SECRET|TOKEN|KEY|PASSWORD|API_KEY|PRIVATE_KEY|AUTH_TOKEN|ACCESS_TOKEN|CLIENT_SECRET)\\s*=\\s*[\"']?[A-Za-z0-9\\-_\\.]{10,}[\"']?",
+			"weight": 0.78,
+			"severity": "high",
+			"reason": "Detected hardcoded secret or credential in environment variable assignment"
+		},
+		{
+			"id": "IO-001",
+			"name": "Script Tag Injection in Output",
+			"category": "insecure_output",
+			"finding_type": "script_tag",
+			"applies_to": [
+				"output"
+			],
+			"pattern": "(?i)<script[^>]*>.*?<\\/script>",
+			"weight": 0.88,
+			"severity": "critical",
+			"reason": "Detected script tag in model output which may cause XSS if rendered"
+		},
+		{
+			"id": "IO-002",
+			"name": "Curl Pipe to Shell",
+			"category": "insecure_output",
+			"finding_type": "curl_pipe_shell",
+			"applies_to": [
+				"output"
+			],
+			"pattern": "(?i)curl\\s+.{0,150}\\|\\s*(ba)?sh",
+			"weight": 0.92,
+			"severity": "critical",
+			"reason": "Detected curl-pipe-to-shell pattern which executes remote code"
+		},
+		{
+			"id": "IO-003",
+			"name": "Destructive rm -rf Command",
+			"category": "insecure_output",
+			"finding_type": "destructive_rm",
+			"applies_to": [
+				"output"
+			],
+			"pattern": "(?i)rm\\s+-[a-z]*r[a-z]*f[a-z]*\\s+(\\/|\\*|~|\\$HOME|\\.\\.|[a-z]{0,3}\\/)",
+			"weight": 0.95,
+			"severity": "critical",
+			"reason": "Detected destructive rm -rf command targeting root or broad paths"
+		},
+		{
+			"id": "IO-004",
+			"name": "Chmod 777 Permissive Permission",
+			"category": "insecure_output",
+			"finding_type": "chmod_777",
+			"applies_to": [
+				"output"
+			],
+			"pattern": "(?i)chmod\\s+(-R\\s+)?777\\s+",
+			"weight": 0.72,
+			"severity": "high",
+			"reason": "Detected chmod 777 which sets world-writable/executable permissions"
+		},
+		{
+			"id": "IO-005",
+			"name": "Eval or Exec with Variable Input",
+			"category": "insecure_output",
+			"finding_type": "eval_exec",
+			"applies_to": [
+				"output"
+			],
+			"pattern": "(?i)\\b(eval|exec)\\s*\\(\\s*(\\$[a-z_]+|request\\.|user_?input|payload|data|params|args)",
+			"weight": 0.85,
+			"severity": "critical",
+			"reason": "Detected eval/exec with dynamic user-controlled input, enabling code injection"
+		},
+		{
+			"id": "IO-006",
+			"name": "Destructive SQL DROP or TRUNCATE",
+			"category": "insecure_output",
+			"finding_type": "destructive_sql",
+			"applies_to": [
+				"output"
+			],
+			"pattern": "(?i)(DROP\\s+(TABLE|DATABASE|SCHEMA|INDEX|VIEW)|TRUNCATE\\s+TABLE)\\s+[a-z0-9_\"'`]+",
+			"weight": 0.88,
+			"severity": "critical",
+			"reason": "Detected destructive SQL statement that may irreversibly delete data"
+		},
+		{
+			"id": "IO-007",
+			"name": "Inline JavaScript Event Handler",
+			"category": "insecure_output",
+			"finding_type": "inline_js_event",
+			"applies_to": [
+				"output"
+			],
+			"pattern": "(?i)<[a-z]+[^>]+(on(load|click|error|mouseover|focus|blur|input|change|submit))\\s*=\\s*[\"']",
+			"weight": 0.8,
+			"severity": "high",
+			"reason": "Detected inline JavaScript event handler in HTML output which may enable XSS"
+		},
+		{
+			"id": "IO-008",
+			"name": "Base64 Decode and Execute",
+			"category": "insecure_output",
+			"finding_type": "b64_exec",
+			"applies_to": [
+				"output"
+			],
+			"pattern": "(?i)(base64\\s+-d|base64decode|atob|frombase64).*\\|.*(ba)?sh|\\$\\((base64\\s+-d|atob)\\s+",
+			"weight": 0.9,
+			"severity": "critical",
+			"reason": "Detected base64 decode piped to shell execution, a common obfuscated code execution pattern"
+		},
+		{
+			"id": "IO-009",
+			"name": "Reverse Shell Command",
+			"category": "insecure_output",
+			"finding_type": "reverse_shell",
+			"applies_to": [
+				"output"
+			],
+			"pattern": "(?i)(bash|nc|ncat|netcat|python|perl|php|ruby)\\s+.{0,80}(\\/dev\\/tcp\\/|\\-e\\s+\\/bin\\/(ba)?sh|\\-e\\s+cmd\\.exe|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\s+\\d{4,5})",
+			"weight": 0.97,
+			"severity": "critical",
+			"reason": "Detected reverse shell or remote command execution pattern in model output"
+		},
+		{
+			"id": "IO-010",
+			"name": "Python Subprocess Shell Execution",
+			"category": "insecure_output",
+			"finding_type": "subprocess_shell",
+			"applies_to": [
+				"output"
+			],
+			"pattern": "(?i)(subprocess\\.(call|run|Popen|check_output)|os\\.(system|popen|execv?p?e?))\\s*\\(\\s*.{0,60}(shell\\s*=\\s*True|user|input|request|payload|data|args)",
+			"weight": 0.84,
+			"severity": "critical",
+			"reason": "Detected Python subprocess or os.system call with shell=True or dynamic user input"
+		}
+	]
