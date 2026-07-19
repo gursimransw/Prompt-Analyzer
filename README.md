@@ -1,61 +1,90 @@
-# Prompt Analyzer API
+<p align="center">
+  <img src="assets/full_logo.png" alt="BearBreach Logo" width="220"/>
+</p>
 
-A lightweight AI Security API written in Go for detecting risky or malicious prompts using rule-based detection, weighted risk scoring, severity mapping, and configurable verdict/action policies.
-This project is the foundation of a larger open-source AI Security Platform aimed at helping security teams defend enterprise AI applications against prompt injection, jailbreak attempts, data exfiltration attempts, and other LLM-related abuse patterns.
----
+<h1 align="center">BearBreach</h1>
 
-## Current Status
+<p align="center">
+  <strong>Enterprise AI Zero Trust Security Platform</strong>
+</p>
 
-This is an early-stage prototype.
-Current version includes:
+<p align="center">
+Observe • Verify • Analyze • Enforce • Establish Trust
+</p>
 
-- Regex-based prompt detection
-- Rule-based category matching
-- Detection reasons
-- Matched rule IDs
-- Rule weights
-- Risk score calculation
-- Severity mapping through policy config
-- Verdict/action mapping through policy config
-- Duplicate category removal
-- Config-driven rules and policies
-- HTTP API endpoint for prompt analysis
+<p align="center">
 
-This is not yet using machine learning, embeddings, or semantic similarity. The current risk score is deterministic and based on matched rule weights.
+![Go](https://img.shields.io/badge/Go-1.25+-00ADD8?logo=go&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)
+![Architecture](https://img.shields.io/badge/Architecture-Microservices-success)
+![Deployment](https://img.shields.io/badge/Deployment-SaaS%20%7C%20Self--Hosted%20%7C%20BYOC-blue)
+![Status](https://img.shields.io/badge/Status-Active%20Development-orange)
 
----
-## Why This Project Exists
-
-Most AI applications now rely on LLMs, RAG systems, agents, and tool-calling workflows. These systems introduce new security risks such as:
-
-- Prompt injection
-- Jailbreak attempts
-- System prompt extraction
-- Data exfiltration
-- Sensitive information leakage
-- Role manipulation
-- Tool misuse
-- Unsafe model behavior
-
-The goal of this project is to build an open-source AI security engine that can eventually act as a security gateway and detection layer for enterprise AI systems.
+</p>
 
 ---
+# BearBreach
 
-## Current Architecture
+> **BearBreach is an Enterprise AI Zero Trust Security Platform that continuously verifies, enforces policy, detects threats, and establishes trust across every AI trust boundary.**
 
-```text
-User Prompt
-   ↓
-HTTP API Endpoint
-   ↓
-Regex Rule Matching Engine
-   ↓
-Matched Rules + Categories + Reasons
-   ↓
-Weight-Based Risk Scoring
-   ↓
-Policy Config
-   ↓
-Severity + Verdict
-   ↓
-JSON Response
+Modern AI applications extend far beyond prompts. They involve users, applications, retrieval systems, foundation models, agents, external tools, memory, and downstream actions. Every interaction introduces new security risks and trust decisions.
+
+BearBreach applies **Zero Trust principles** to AI systems by continuously validating every interaction crossing these trust boundaries. Rather than assuming any input, context, model output, or agent action is trustworthy, BearBreach evaluates risk, enforces policy, generates telemetry, and enables AI Detection & Response across the complete AI lifecycle.
+
+---
+# What is AI Zero Trust?
+
+Traditional Zero Trust follows a simple principle:
+
+> **Never Trust. Always Verify.**
+
+BearBreach extends this philosophy to AI systems.
+
+Rather than assuming that user input, retrieved knowledge, model responses, agents, or external tools are trustworthy, BearBreach continuously evaluates every interaction crossing an AI trust boundary.
+
+Every request is inspected.
+
+Every response can be verified.
+
+Every tool invocation can be authorized.
+
+Every AI security event can be correlated.
+
+Trust is continuously earned—not assumed.
+
+---
+
+# AI Trust Boundaries
+
+Modern AI applications operate across multiple trust boundaries.
+
+```
+| **Boundary**                | **Data Crossing**                                                                 |
+| --------------------------- | --------------------------------------------------------------------------------- |
+| **User-to-system**          | Untrusted natural language enters the system                                      |
+| **System-to-LLM**           | Constructed prompt (system instructions + user input + context) sent to the model |
+| **LLM-to-tools**            | Model output triggers database queries, API calls, or file operations             |
+| **System-to-external-data** | Retrieved documents from vector store or external sources enter the prompt        |
+| **System-to-user**          | Generated response delivered to the user                                          |
+```
+
+Every transition represents a potential attack surface.
+
+BearBreach continuously evaluates each boundary using Zero Trust principles before allowing information or actions to proceed.
+
+---
+
+# Zero Trust Principles
+
+BearBreach applies the following principles across AI systems:
+
+- Never Trust, Always Verify
+- Continuous Risk Evaluation
+- Least Privilege for AI Agents
+- Policy-Driven Decision Making
+- Explicit Verification of AI Interactions
+- Continuous Telemetry and Monitoring
+- Detection and Response by Default
+- Assume AI Components Can Be Compromised
+- Defense in Depth
+- Complete Auditability

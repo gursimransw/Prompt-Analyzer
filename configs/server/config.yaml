@@ -1,5 +1,0 @@
-env: "dev"
-detection_rule_library: "configs/rules/rules.json"
-policy_config: "configs/policy/policy.json"
-http_server:
-  address: "0.0.0.0:8000"
